@@ -15,6 +15,7 @@ services:
   mysql:
     image: mysql:5.7
     restart: always
+    command: --port=3308
     environment:
       MYSQL_DATABASE: "api_etudiant"
       MYSQL_ROOT_PASSWORD: "root"
