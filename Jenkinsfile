@@ -16,7 +16,7 @@ pipeline {
         }
         stage("Generate backend image") {
             steps {
-                dir("backend") {
+                dir("RestAPISpringPipline") {
                     sh "mvn clean install"
                     sh "docker build -t backend ."
                 }
@@ -24,7 +24,7 @@ pipeline {
         }
         stage("Run docker compose") {
             steps {
-                dir("Backend") {
+                dir("RestAPISpringPipline") {
                     sh "docker compose up -d" 
                 }
             }
