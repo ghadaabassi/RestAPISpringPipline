@@ -14,8 +14,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Setter
-@Getter
 public class Etudiant{
 		@Id
 		private Long idEtudiant;
