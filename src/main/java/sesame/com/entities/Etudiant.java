@@ -9,10 +9,14 @@ import javax.persistence.Id;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
-public class Etudiant {
+@Setter
+@Getter
+public class Etudiant{
 		@Id
 		private Long idEtudiant;
 		private String nomEtudiant;
