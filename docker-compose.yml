@@ -4,7 +4,7 @@ services:
     ports:
       - "0.0.0.0:8091:8091"
     environment:
-      - SPRING_DATABASE_URL=jdbc:mysql://mysql:3306/api_etudiant
+      - SPRING_DATABASE_URL=jdbc:mysql://mysql:3308/api_etudiant
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=root
       - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.cj.jdbc.Driver
@@ -21,7 +21,7 @@ services:
       MYSQL_USER: "root"
       MYSQL_PASSWORD: "root"
     ports:
-      - "0.0.0.0:3306:3306"
+      - "0.0.0.0:3308:3306"
     volumes:
       - api_etudiant:/var/lib/mysql
 
