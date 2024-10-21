@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import sesame.com.entities.Etudiant;
-@Repository
+@Service
 public interface EtudiantRepository extends  JpaRepository<Etudiant, Long>{
 
 }
