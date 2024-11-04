@@ -3,6 +3,10 @@ pipeline {
     tools {
         maven 'maven'
     }
+      environment {
+        NEXUS_URL = 'http://192.168.209.8:8081/repository/maven-nexus-repo/'
+        NEXUS_CREDENTIALS = credentials('nexus-cred')
+    }
     stages {
         stage("Clean up") {
             steps {
@@ -40,6 +44,25 @@ pipeline {
             }
         }
 
+
+stage("Publish to Nexus") {
+            steps {
+                dir("RestAPISpringPipline") {
+                    sh """
+                        mvn deploy:deploy-file \
+                        -Durl=${NEXUS_URL} \
+                        -DrepositoryId=nexus-repo \
+                        -Dfile=target/backend.jar \
+                        -DgroupId=com.example \
+                        -DartifactId=backend \
+                        -Dversion=1.0.0 \
+                        -Dpackaging=jar \
+                        --settings /path/to/your/settings.xml
+                    """
+                }
+            }
+        }
+    
 
     }
 }
