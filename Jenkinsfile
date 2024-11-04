@@ -46,23 +46,22 @@ pipeline {
 
 
 stage("Publish to Nexus") {
-            steps {
-                dir("RestAPISpringPipline") {
-                    sh """
-                        mvn deploy:deploy-file \
-                        -Durl=${NEXUS_URL} \
-                        -DrepositoryId=nexus-repo \
-                        -Dfile=target/backend.jar \
-                        -DgroupId=com.example \
-                        -DartifactId=backend \
-                        -Dversion=1.0.0 \
-                        -Dpackaging=jar \
-                        --settings /path/to/your/settings.xml
-                    """
-                }
-            }
+    steps {
+        dir("RestAPISpringPipline") {
+            sh """
+                mvn deploy:deploy-file \
+                -Durl=${NEXUS_URL} \
+                -DrepositoryId=nexus-repo \
+                -Dfile=target/backend.jar \
+                -DgroupId=com.example \
+                -DartifactId=backend \
+                -Dversion=1.0.0 \
+                -Dpackaging=jar \
+                --settings C:\\Users\\Ghada\\.m2\\settings.xml
+            """
         }
-    
+    }
+}
 
     }
 }
