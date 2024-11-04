@@ -21,7 +21,7 @@ pipeline {
         stage("Generate backend image") {
             steps {
                 dir("RestAPISpringPipline") {
-                    sh "mvn clean install"
+                    sh "mvn clean package"
                     sh "docker build -t backend ."
                 }
             }
@@ -52,11 +52,11 @@ stage("Publish to Nexus") {
                 mvn deploy:deploy-file \
                 -Durl=${NEXUS_URL} \
                 -DrepositoryId=nexus-repo \
-                -Dfile=target/backend.jar \
-                -DgroupId=com.example \
-                -DartifactId=backend \
-                -Dversion=1.0.0 \
-                -Dpackaging=jar \
+                -Dfile=target/api_etudiant-0.0.1-SNAPSHOT.jar 
+                -DgroupId=sesame.com \
+                -DartifactId=api_etudiant \
+                -Dversion=0.0.1-SNAPSHOT \
+                -Dpackaging=jar 
               
             """
         }
