@@ -4,7 +4,7 @@ pipeline {
         maven 'maven'
     }
     environment {
-        NEXUS_URL = '192.168.209.8:8081/repository/maven-nexus-repo/'
+        NEXUS_URL = 'http://192.168.209.8:8081/repository/maven-nexus-repo/'
         NEXUS_CREDENTIALS = credentials('nexus-cred')
     }
     stages {
