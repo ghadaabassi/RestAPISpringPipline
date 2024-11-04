@@ -57,7 +57,7 @@ stage("Publish to Nexus") {
                 -DartifactId=backend \
                 -Dversion=1.0.0 \
                 -Dpackaging=jar \
-                --settings C:\\Users\\Ghada\\.m2\\settings.xml
+              
             """
         }
     }
