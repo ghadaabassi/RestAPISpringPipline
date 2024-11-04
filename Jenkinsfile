@@ -33,8 +33,8 @@ pipeline {
         stage("SonarQube Analysis") {
             steps {
                 withSonarQubeEnv("sonar-server") { 
-                     dir("FullStackPipline/springboot/app") { 
-                    sh "mvn sonar:sonar"
+                    dir("RestAPISpringPipline") { 
+                        sh "mvn sonar:sonar"
                 }
                 }
             }
