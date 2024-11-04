@@ -44,24 +44,35 @@ pipeline {
             }
         }
 
+                        filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
+                        if (filesByGlob.size() == 0) {
+                            error "No artifact found in target directory for packaging type ${pom.packaging}"
+                        }
 
-stage("Publish to Nexus") {
-    steps {
-        dir("RestAPISpringPipline") {
-            sh """
-                mvn deploy:deploy-file \
-                -Durl=${NEXUS_URL} \
-                -DrepositoryId=nexus-repo \
-                -Dfile=target/api_etudiant-0.0.1-SNAPSHOT.jar 
-                -DgroupId=sesame.com \
-                -DartifactId=api_etudiant \
-                -Dversion=0.0.1-SNAPSHOT \
-                -Dpackaging=jar 
-              
-            """
-        }
-    }
-}
+                        artifactPath = filesByGlob[0].path;
+                        echo "Uploading artifact: ${artifactPath} with groupId: ${pom.groupId}, artifactId: ${pom.artifactId}, version: ${pom.version}"
+                        nexusArtifactUploader(
+                            nexusVersion: 'nexus2',
+                            protocol: 'http',
+                            nexusUrl: NEXUS_URL,
+                            groupId: pom.groupId,
+                            version: pom.version,
+                            repository: 'nexus-repo',
+                            credentialsId: 'nexus-cred',
+                            artifacts: [
+                                [artifactId: pom.artifactId,
+                                 classifier: '',
+                                 file: artifactPath,
+                                 type: pom.packaging],
+                                [artifactId: pom.artifactId,
+                                 classifier: '',
+                                 file: "pom.xml",
+                                 type: "pom"]
+                            ]
+                        )
+                    }
+                }
+            
 
-    }
-}
+    
+
