@@ -11,6 +11,8 @@ services:
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
     depends_on:
       - mysql
+    networks:
+      - back
 
   mysql:
     image: mysql:5.7
@@ -25,6 +27,11 @@ services:
       - "0.0.0.0:3308:3308"
     volumes:
       - api_etudiant:/var/lib/mysql
+    networks:
+      - back
 
 volumes:
   api_etudiant:
+
+networks:
+  back:
