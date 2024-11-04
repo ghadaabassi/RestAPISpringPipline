@@ -59,7 +59,7 @@ pipeline {
                         nexusArtifactUploader(
                             nexusVersion: 'nexus2',
                             protocol: 'http',
-                            nexusUrl: NEXUS_URL,
+                            nexusUrl: '192.168.209.8:8081',
                             groupId: pom.groupId,
                             version: pom.version,
                             repository: 'maven-nexus-repo',
