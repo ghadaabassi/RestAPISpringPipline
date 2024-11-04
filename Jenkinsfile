@@ -3,7 +3,7 @@ pipeline {
     tools {
         maven 'maven'
     }
-      environment {
+    environment {
         NEXUS_URL = 'http://192.168.209.8:8081/repository/maven-nexus-repo/'
         NEXUS_CREDENTIALS = credentials('nexus-cred')
     }
@@ -33,24 +33,32 @@ pipeline {
                 }
             }
         }
-
         stage("SonarQube Analysis") {
             steps {
                 withSonarQubeEnv("sonar-server") { 
                     dir("RestAPISpringPipline") { 
                         sh "mvn sonar:sonar"
-                }
+                    }
                 }
             }
         }
-
-                        filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
+        stage("Publish to Nexus Repository Manager") {
+            steps {
+                dir("RestAPISpringPipline") {
+                    script {
+                        // Read the POM file to get artifact details
+                        pom = readMavenPom file: "pom.xml"
+                        
+                        // Find the artifact by packaging type
+                        filesByGlob = findFiles(glob: "target/*.${pom.packaging}")
                         if (filesByGlob.size() == 0) {
                             error "No artifact found in target directory for packaging type ${pom.packaging}"
                         }
 
-                        artifactPath = filesByGlob[0].path;
+                        artifactPath = filesByGlob[0].path
                         echo "Uploading artifact: ${artifactPath} with groupId: ${pom.groupId}, artifactId: ${pom.artifactId}, version: ${pom.version}"
+
+                        // Upload the artifact to Nexus
                         nexusArtifactUploader(
                             nexusVersion: 'nexus2',
                             protocol: 'http',
@@ -72,7 +80,7 @@ pipeline {
                         )
                     }
                 }
-            
-
-    
-
+            }
+        }
+    }
+}
