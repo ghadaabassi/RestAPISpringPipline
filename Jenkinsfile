@@ -57,7 +57,7 @@ pipeline {
                         echo "Uploading artifact: ${artifactPath} with groupId: ${pom.groupId}, artifactId: ${pom.artifactId}, version: ${pom.version}"
 
                         nexusArtifactUploader(
-                            nexusVersion: 'nexus2',
+                            nexusVersion: 'nexus3',
                             protocol: 'http',
                             nexusUrl: '192.168.209.8:8081',
                             groupId: pom.groupId,
