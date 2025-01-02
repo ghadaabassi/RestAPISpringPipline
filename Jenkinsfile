@@ -15,7 +15,7 @@ pipeline {
         }
         stage("Clone repo") {
             steps {
-                sh 'git clone https://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@github.com/ghadaabassi/RestAPISpringPipline.git'
+                sh 'git clone https://github.com/ghadaabassi/RestAPISpringPipline.git'
             }
         }
         stage("Generate backend image") {
