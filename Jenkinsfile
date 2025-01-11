@@ -4,7 +4,7 @@ pipeline {
         maven 'maven'
     }
     environment {
-        NEXUS_URL = 'http://192.168.209.8:8081/repository/maven-nexus-repo/'
+        NEXUS_URL = 'http://0.0.0.0:8081/repository/maven-nexus-repo/'
         NEXUS_CREDENTIALS = credentials('nexus-cred')
     }
     stages {
@@ -59,7 +59,7 @@ pipeline {
                         nexusArtifactUploader(
                             nexusVersion: 'nexus3',
                             protocol: 'http',
-                            nexusUrl: '192.168.209.8:8081',
+                            nexusUrl: '0.0.0.0:8081',
                             groupId: pom.groupId,
                             version: pom.version,
                             repository: 'maven-nexus-repo',
